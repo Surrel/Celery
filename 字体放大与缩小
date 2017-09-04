@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>字体放大与缩小</title>
+<script src="../js/jquery-1.11.1.js"></script>
+<script>
+	function big(){
+		var size = $("p").css("font-size");
+		size = size.replace("px","");
+		$("p").css("font-size",++size+"px");
+	}
+	function small(){
+		var size = $("p").css("font-size");
+		size = size.replace("px","");
+		$("p").css("font-size",--size+"px");
+	}
+</script>
+</head>
+<body>
+	<input type="button" value="+" onclick="big();"/>
+	<input type="button" value="-" onclick="small();"/>
+	<p>jQuery实际是DOM数组</p>
+	<p>只有jQuery猜能调用jQuery方法</p>
+	<p>只有DOM对象才能调用DOM的API</p>
+</body>
+</html>
