@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>购物车</title>
+    <meta charset="utf-8" />
+    <style type="text/css">
+      h1 {
+        text-align:center;
+      }
+      table {
+        margin:0 auto;
+        width:60%;
+        border:2px solid #aaa;
+        border-collapse:collapse;
+      }
+      table th, table td {
+        border:2px solid #aaa;
+        padding:5px;
+      }
+      th {
+        background-color:#eee;
+      }
+    </style>
+    <script src="../js/jquery-1.11.1.js"></script>
+    <script>
+    	function add_shoppingcart(btn){
+    		var name = $(btn).parent().siblings().eq(0).html();
+    		var p = $(btn).parent().siblings().eq(1).html();
+    		var ntr = 
+    			'<tr>'+
+    			'<td>'+name+'</td>'+
+	          '<td>'+p+'</td>'+
+	          '<td align="center">'+
+	           ' <input type="button" value="-" onclick = "reduce(this);"/>'+
+	           ' <input type="text" size="3" readonly value="1"/>'+
+	           ' <input type="button" value="+" onclick="add(this);"/>'+
+	         ' </td>'+
+	         ' <td>'+p+'</td>'+
+	         ' <td align="center"><input type="button" value="x" onclick = "remove(this);"/></td>'+
+	       ' </tr>';
+	       var tbody = $("#goods").append(ntr);
+	       sum();
+    	}
+    	function add(btn){
+    		var name = $(btn).prev().val();
+    		$(btn).prev().val(++name);
+    		var p =$(btn).parent().prev().html();
+    		$(btn).parent().next().html(name*p);
+    		sum();
+    	}
+    	function reduce(btn){
+    		var name = $(btn).next().val();
+    		$(btn).next().val(--name);
+    		var p = $(btn).parent().prev().html();
+    		if(name * p<=0){
+    			$(btn).next().val(1);
+    			return;
+    		}else{
+    			$(btn).parent().next().html(name*p);
+    		}
+    		sum();
+    	}
+    	function remove(btn){
+    		$(btn).parent().parent().remove();
+    		sum();
+    	}
+    	function sum(){
+    		var tr = $("#goods").children();
+    		var s = 0
+    		for(var i = 0;i<tr.length;i++){
+    			var td = tr.eq(i).children().eq(3).text();
+    			s += parseFloat(td); 
+    		}
+    		$("#total").text(s);
+    	}
+    </script>
+  </head>
+  <body>
+    <h1>真划算</h1>
+    <table>
+      <tr>
+        <th>商品</th>
+        <th>单价(元)</th>
+        <th>颜色</th>
+        <th>库存</th>
+        <th>好评率</th>
+        <th>操作</th>
+      </tr>   
+      <tr>
+        <td>罗技M185鼠标</td>
+        <td>80</td>
+        <td>黑色</td>
+        <td>893</td>
+        <td>98%</td>
+        <td align="center">
+          <input type="button" value="加入购物车" onclick="add_shoppingcart(this);"/>
+        </td>
+      </tr>
+      <tr>
+        <td>微软X470键盘</td>
+        <td>150</td>
+        <td>黑色</td>
+        <td>9028</td>
+        <td>96%</td>
+        <td align="center">
+          <input type="button" value="加入购物车" onclick="add_shoppingcart(this);"/>
+        </td>
+      </tr>
+      <tr>
+        <td>洛克iphone6手机壳</td>
+        <td>60</td>
+        <td>透明</td>
+        <td>672</td>
+        <td>99%</td>
+        <td align="center">
+          <input type="button" value="加入购物车" onclick="add_shoppingcart(this);"/>
+        </td>
+      </tr>
+      <tr>
+        <td>蓝牙耳机</td>
+        <td>100</td>
+        <td>蓝色</td>
+        <td>8937</td>
+        <td>95%</td>
+        <td align="center">
+          <input type="button" value="加入购物车" onclick="add_shoppingcart(this);"/>
+        </td>
+      </tr>
+      <tr>
+        <td>金士顿U盘</td>
+        <td>70</td>
+        <td>红色</td>
+        <td>482</td>
+        <td>100%</td>
+        <td align="center">
+          <input type="button" value="加入购物车" onclick="add_shoppingcart(this);"/>
+        </td>
+      </tr>
+    </table>
+  
+    <h1>购物车</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>商品</th>
+          <th>单价(元)</th>
+          <th>数量</th>
+          <th>金额(元)</th>
+          <th>删除</th>
+        </tr>
+      </thead>
+      <tbody id="goods">
+        
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3" align="right">总计</td>
+          <td id="total"></td>
+          <td></td>
+        </tr>
+      </tfoot>
+    </table>    
+  </body>
+</html>
