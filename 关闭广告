@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- 开发一个网页,上方加一个广告区域,
+点击区域内的按钮x可以让此区域向上收起,
+页面加载3秒后也可以自动收起此区域 -->
+<meta charset="UTF-8">
+<title>广告</title>
+<style>
+	#i3{
+		height:300px;
+		background-color:red;
+	}
+	#i3>input{
+		float:right;
+		margin:5px;
+	}
+</style>
+<script src="../js/jquery-1.11.1.js"></script>
+<script>
+	$(function(){
+		$("#i3>input").click(function(){
+			$("#i3").slideUp(500);
+		});
+		setInterval(function(){
+			$("#i3>input").trigger("click");
+		},1000)
+	});
+</script>
+</head>
+<body>
+	<div id="i3">
+		<input type="button" value="x"/>
+	</div>
+</body>
+</html>
