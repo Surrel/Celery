@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- 开发一个网页,增加一个区域,
+鼠标悬停到此区域上方时,让其向右偏移20px,
+鼠标离开此区域时,让其回到原位 -->
+<meta charset="UTF-8">
+<title>自定义动画</title>
+<style>
+	#i1{
+		background-color:red;
+		height:300px;
+		width:300px;
+		position:relative;
+	}
+</style>
+<script src="../js/jquery-1.11.1.js"></script>
+<script>
+	$(function(){
+		$("#i1").hover(
+			function(){
+				$("#i1").animate({"left":"20px"},500);			
+			},
+			function(){
+				$(this).animate({"left":"0px"},500);
+			}
+		);
+	});
+</script>
+</head>
+<body>
+	<div id="i1"></div>
+</body>
+</html>
