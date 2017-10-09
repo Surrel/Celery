@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	#d1{
+		width:450px;
+		height:350px;
+		background-color:black;
+		margin-left:400px;
+		margin-top:10px;
+	}
+	#d2{
+		height:35px;
+		background-color:red;
+		color:yellow;
+	}
+	table{
+		color:white;
+		font-style:italic;
+		font-size:24px;
+	}
+</style>
+<script src="js/jquery-3.2.1.js"></script>
+<script type="text/javascript">
+	$(function(){
+		setInterval(quoto,5000);
+	});
+	
+	function quoto(){
+		$.ajax({"url":"quoto.do",
+				"type":"get",
+				"dataType":"json",
+				"success":function(data){
+					$('#tb1').empty();
+					for(i = 0; i<data.length; i++){
+							var s = data[i];
+							$('#tb1').append('<tr><td>'+ s.code
+									+'</td><td>' + s.name +'</td><td>'+ s.price +'</td><tr>');
+					}
+				}})
+	}
+</script>
+</head>
+<body style="font-szie:30px;">
+	<div id="d1">
+		<div id="d2">股票实时行情</div>
+		<div id="d3">
+			<table width="100%">
+				<thead>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</thead>
+				<tbody id="tb1">
+				
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>
